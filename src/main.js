@@ -39,6 +39,13 @@ class SavingsAccount extends Account{
         this.minimumBalance = 500;
         this.acctType = "Savings"; 
     }
+
+    static checkBalance(BVN){
+        if (this.records.has(BVN)){
+            var availableBalance = this.records.get(BVN)[0];
+            return availableBalance;
+        }
+    }
 }
 
 class CurrentAccount extends Account{
@@ -48,8 +55,16 @@ class CurrentAccount extends Account{
         this.minimumBalance = 0;
         this.acctType = "Current";
     }
+
+    static checkBalance(BVN){
+        if (this.records.has(BVN)){
+            var availableBalance = this.records.get(BVN)[0];
+            return availableBalance;
+        }
+    }
 }
 
 console.log(SavingsAccount.createRecord(1234, "Uche M.", 100000000000));
 console.log(SavingsAccount.deposit(1234, 200, "Uche M."));
-console.log(SavingsAccount.withdraw(1234, 600, "Uche M."));
+console.log(SavingsAccount.withdraw(1234));
+console.log(SavingsAccount.checkBalance(1234, 600, "Uche M."));
